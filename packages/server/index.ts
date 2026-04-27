@@ -3,6 +3,7 @@ import { rbacAdminMiddleware } from "./src/middlewares/rbacMiddleware";
 import { cors } from 'hono/cors'
 import authController from "./src/controllers/authController";
 import categoryController from './src/controllers/categoryController';
+import discoverDappsController from './src/controllers/discoverDappsController';
 import { initializeDB } from "./src/utils/db";
 import userController from "./src/controllers/userController";
 
@@ -23,5 +24,6 @@ app.route('/auth', authController);
 app.route('/user', userController);
 app.get('/', (c) => c.text("hello"));
 app.route('/api/categories', categoryController);
+app.route('/api/discover-dapps', discoverDappsController);
 
 export default app;

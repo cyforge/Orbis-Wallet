@@ -47,3 +47,17 @@ export const categoriesTable = pgTable('categories', {
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });
+
+// discover_dapps table
+export const discoverDappsTable = pgTable('discover_dapps', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    title: varchar('title', { length: 255 }).notNull(),
+    status: varchar('status', { length: 50 }).notNull().default('active'),
+    categoryId: uuid('category_id').references(() => categoriesTable.id, { onDelete: 'set null' }),
+    description: varchar('description', { length: 1000 }),
+    logo: varchar('logo', { length: 500 }),
+    link: varchar('link', { length: 500 }).notNull(),
+    slug: varchar('slug', { length: 255 }).notNull().unique(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+});
